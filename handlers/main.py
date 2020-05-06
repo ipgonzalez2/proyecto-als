@@ -15,10 +15,19 @@
 # limitations under the License.
 #
 import webapp2
+from webapp2_extras import jinja2
+from model.song import Song
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        songs = Song.query()
+
+        values_template= {
+            "songs" : songs
+        }
+
+        jinja = jinja2.get_jinja2(app=self.app)
+        self.response.write(jinja.render_template("index.html", **values_template))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)

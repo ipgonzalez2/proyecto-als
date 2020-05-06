@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My songs</title>
+</head>
+<body>
+<h1> Canciones </h1>
+    {% if songs.count() > 0 %}
+        {% for song in songs %}
+    (<a href="/songs/delete?id={{ song.key.urlsafe() }}"> Eliminar canción </a>)
+            (<a href="/quotes/list?id{{ song.key.urlsafe() }}"> Frases </a>)
+            <b>{{ song.title }}</b>
+            <b>{{ song.artist }}</b>
+            <b>{{ song.link }}</b>
+        {% endfor %}
+    {% else %}
+        <p><b>No hay canciones registradas.</b></p>
+    {% endif %}
+
+    <a href="/songs/new"> Nueva canción </a>
+</body>
+</html>

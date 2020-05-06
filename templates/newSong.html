@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva canción</title>
+
+    <script>
+        function check()
+        {
+            const edTitle = document.getElementById( "edTitle" );
+            const edArtist = document.getElementById( "edArtist" );
+            const edLink = document.getElementById( "edLink" );
+
+            return ( edTitle.value.trim().length > 0
+            && edArtist.value.trim().length > 0
+            && edLink.value.trim().length > 0);
+
+        }
+    </script>
+</head>
+<body>
+    <h1>Nueva canción</h1>
+    <form id="frmNewSong"
+          method="post"
+          action="/songs/new"
+          onsubmit="return check()">
+
+    <p>
+    <label for="edTitle">Título</label>
+    <input type="text" id="edTitle" name="edTitle" placeholder="Título">
+    </p>
+
+        <p>
+            <label for="edArtist">Artista</label>
+    <input type="text" id="edArtist" name="edArtist" placeholder="Artista">
+    </p>
+
+        <p>
+        <label for="edLink">URL</label>
+    <input type="text" id="edLink" name="edLink" placeholder="URL">
+    </p>
+
+        <p><input type="submit" value="Añadir"></p>
+
+    </form>
+
+</body>
+</html>
