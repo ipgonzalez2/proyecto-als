@@ -2,7 +2,8 @@
 
 from google.appengine.ext import ndb
 
-class Song(ndb.Model):
+class Line(ndb.Model):
     title = ndb.StringProperty(required=True)
     artist = ndb.StringProperty(required=True)
-    link = ndb.StringProperty(required=True)
+    line = ndb.StringProperty(required=True)
+    email = ndb.StringProperty(required=True, indexed=True)

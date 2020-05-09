@@ -12,8 +12,30 @@ handlers:
 - url: /
   script: handlers.main.app
 
-- url: /songs/new
-  script: handlers.songs.new.app
+- url: /lines
+  script: handlers.lines.list.app
+  login: required
+
+- url: /lines/new
+  script: handlers.lines.new.app
+  login: required
+
+- url: /lines/delete
+  script: handlers.lines.delete.app
+  login: required
+
+- url: /css
+  static_dir: templates/css
+
+- url: /scss
+  static_dir: templates/scss
+
+- url: /img
+  static_dir: templates/img
+
+- url: /vendor
+  static_dir: templates/vendor
+
 
 libraries:
 - name: webapp2

@@ -14,34 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import webapp2
 from webapp2_extras import jinja2
 from model.line import Line
-from webapp2_extras.users import users
 
 
-class MainHandler(webapp2.RequestHandler):
+class ListHandler(webapp2.RequestHandler):
     def get(self):
-        usr = users.get_current_user()
-
-        if usr:
-            url_usr = users.create_logout_url("/")
-            lines = Line.query(Line.email == usr.email())
-        else:
-            url_usr = users.create_login_url("/")
-            lines = []
+        lines = Line.query()
 
         values_template= {
-            "lines" : lines,
-            "usr": usr,
-            "url_usr": url_usr
+            "lines" : lines
         }
 
         jinja = jinja2.get_jinja2(app=self.app)
         self.response.write(jinja.render_template("index.html", **values_template))
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/lines', ListHandler)
 ], debug=True)
-
