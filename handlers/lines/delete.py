@@ -9,22 +9,13 @@ from webapp2_extras.users import users
 
 class DeleteHandler(webapp2.RequestHandler):
 
-    def post(self):
+    def get(self):
         usr = users.get_current_user()
-
+        line = Line.get(self.request)
         if usr:
-            title = self.request.get("edTitle", "")
-            artist = self.request.get("edArtist", "")
-            line = self.request.get("edLine","")
-
-
-            if not(title) or not(artist) or not(line):
-                return self.redirect("/")
-            else:
-                line = Line(title=title, artist=artist, line=line, email=usr.email())
-                line.put()
-                time.sleep(1)
-                return self.redirect("/")
+            line.key.delete()
+            time.sleep(1)
+            return self.redirect("/")
 
         else:
             return self.redirect("/")

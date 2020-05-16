@@ -17,19 +17,44 @@
 import webapp2
 from webapp2_extras import jinja2
 from model.line import Line
+from webapp2_extras.users import users
 
 
 class ListHandler(webapp2.RequestHandler):
     def get(self):
-        lines = Line.query()
+        usr = users.get_current_user()
 
-        values_template= {
-            "lines" : lines
+        if usr:
+            url_usr = users.create_logout_url("/")
+            lines = Line.query(Line.email == usr.email())
+            linesOthers = Line.query(Line.email != usr.email()
+                                     )
+            quotes = []
+
+            for l in lines:
+                quotes.append(l.line.lower())
+
+            linesNew = []
+
+            for line in linesOthers:
+                if line.line.lower() not in quotes:
+                    linesNew.append(line)
+
+
+        else:
+            url_usr = users.create_login_url("/")
+            linesNew =[]
+
+        print(linesNew)
+        values_template = {
+            "lines": linesNew,
+            "usr": usr,
+            "url_usr": url_usr
         }
 
         jinja = jinja2.get_jinja2(app=self.app)
-        self.response.write(jinja.render_template("index.html", **values_template))
+        self.response.write(jinja.render_template("list.html", **values_template))
 
 app = webapp2.WSGIApplication([
-    ('/lines', ListHandler)
+    ('/lines/list', ListHandler)
 ], debug=True)

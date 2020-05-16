@@ -7,3 +7,14 @@ class Line(ndb.Model):
     artist = ndb.StringProperty(required=True)
     line = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True, indexed=True)
+
+    @staticmethod
+    def get(req):
+        try:
+            id = req.GET["id"]
+        except KeyError:
+            id = ""
+
+        return ndb.Key(urlsafe=id).get()
+
+

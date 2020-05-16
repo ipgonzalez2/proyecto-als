@@ -30,6 +30,19 @@ class NewSongHandler(webapp2.RequestHandler):
         else:
             return self.redirect("/")
 
+    def get(self):
+        usr = users.get_current_user()
+        line = Line.get(self.request)
+
+        if usr:
+            lineLike = Line(title=line.title, artist=line.artist, line=line.line, email=usr.email())
+            lineLike.put()
+            time.sleep(1)
+            return self.redirect("/lines/list")
+
+        else:
+            return self.redirect("/")
+
 
 app = webapp2.WSGIApplication([
     ('/lines/new', NewSongHandler)

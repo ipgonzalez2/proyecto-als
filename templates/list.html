@@ -11,22 +11,22 @@
   <title>Lil Lines</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/one-page-wonder.min.css" rel="stylesheet">
+  <link href="../css/one-page-wonder.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
 
 </head>
 
@@ -35,7 +35,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Lil Lines</a>
+      <a class="navbar-brand" href="/">Lil Lines</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,8 +58,7 @@
     <div class="masthead-content">
       <div class="container">
         <h1 class="masthead-heading mb-0">Lil Lines</h1>
-        <h2 class="masthead-subheading mb-0">The littest lines ever</h2>
-        <a href="/lines/list" class="btn btn-primary btn-xl rounded-pill mt-5">See other's</a>
+        <h2 class="masthead-subheading mb-0">See other's favourite lines</h2>
       </div>
     </div>
   </header>
@@ -74,19 +73,18 @@
 										<th class="cell100 column1">Título</th>
 										<th class="cell100 column2">Artista</th>
 										<th class="cell100 column3">Frase</th>
-										<th class="cell100 column4">Opciones   <a href="/lines/new" data-toggle="modal" data-target="#modalLargeDefault"> <i class="fas fa-plus-circle" style="margin-left: 100px;
-    font-size: 1.5em"></i> </a></th>
+										<th class="cell100 column4">Opciones</th>
 									</tr>
 								</thead>
 								<tbody>
-								{% if lines.count() > 0 %}
+								{% if lines|length > 0 %}
         							{% for line in lines %}
 										<tr class="row100 body">
 											<td class="cell100 column1">{{ line.title}}</td>
 										<td class="cell100 column2">{{ line.artist }}</td>
 										<td class="cell100 column3">"{{line.line}}"</td>
-										<td class="cell100 column4"><a href="/lines/delete?id={{ line.key.urlsafe() }}" style="margin-left: 25px"> <i class="fas fa-trash-alt"></i> </a></td>
-										</tr>
+                                            <td class="cell100 column4"><a href="/lines/new?id={{ line.key.urlsafe() }}" style="margin-left: 25px"> <i class="fas fa-heart"></i> </a></td>
+
         							{% endfor %}
     							{% else %}
         							<td class="cell100 column1">No tienes frases registradas</td>
@@ -110,43 +108,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<div class="modal fade" id="modalLargeDefault" tabindex="-1" role="dialog" aria-labelledby="modalLargeDefaultLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modalLargeDefaultLabel">Nueva frase</h4>
-      </div>
-      <div class="modal-body">
-        <form id="frmNewLine"
-          method="post"
-          action="/lines/new"
-          onsubmit="return check()">
-
-    <p>
-    <input type="text" id="edTitle" name="edTitle" placeholder="Título">
-    </p>
-
-        <p>
-    <input type="text" id="edArtist" name="edArtist" placeholder="Artista">
-    </p>
-
-        <p>
-        <input type="text" id="edLine" name="edLine" placeholder="Frase">
-    </p>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-default btn-primary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

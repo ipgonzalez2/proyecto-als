@@ -12,8 +12,12 @@ handlers:
 - url: /
   script: handlers.main.app
 
-- url: /lines
+- url: /lines/list
   script: handlers.lines.list.app
+  login: required
+
+- url: /lines/like
+  script: handlers.lines.like.app
   login: required
 
 - url: /lines/new
